@@ -1,17 +1,18 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "./include/being.h"
+#include "./include/constants.h"
+
 int main() {
     // Create the main window
     sf::RenderWindow window(sf::VideoMode({800, 600}), "SFML window");
 
-    // Load a sprite to display
-    const sf::Texture texture("../src/assets/sprites/cute_image.jpg");
-    sf::Sprite sprite(texture);
+    // Create Being
+    Being myBeing;
 
-    // Create a graphical text to display
-    const sf::Font font("../src/assets/fonts/arial.ttf");
-    sf::Text text(font, "Hello SFML", 50);
+    // Setup Clock for fixed time steps
+    sf::Clock clock;
 
     // Start the game loop
     while (window.isOpen()) {
@@ -20,17 +21,22 @@ int main() {
             // Close window: exit
             if (event->is<sf::Event::Closed>()) window.close();
         }
+        static float accumulator = 0.0f;
+        float frameTime = clock.restart().asSeconds();
 
-        // Clear screen
+        if (frameTime > 0.25f) frameTime = 0.25f;
+
+        accumulator += frameTime;
+
+        while (accumulator >= DT) {
+            // Do next simulation Step
+            myBeing.move();
+            accumulator -= DT;
+        }
+
+        // Do Rendering
         window.clear();
-
-        // Draw the sprite
-        window.draw(sprite);
-
-        // Draw the string
-        window.draw(text);
-
-        // Update the window
+        myBeing.draw(window);
         window.display();
     }
     return 0;

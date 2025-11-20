@@ -15,11 +15,14 @@ FetchContent_MakeAvailable(SFML)
 
 # Set source files
 set(SOURCES
-    src/main.cpp
+    ./src/main.cpp
+    ./src/core/being.cpp
 )
 
 # Set headers files
 set(HEADERS
+    ./src/include/constants.h
+    ./src/include/being.h
 )
 
 add_executable(main ${SOURCES} ${HEADERS})
