@@ -1,3 +1,11 @@
+
+# My ignores
+*.DS_Store
+build/
+
+
+
+
 # Prerequisites
 *.d
 
