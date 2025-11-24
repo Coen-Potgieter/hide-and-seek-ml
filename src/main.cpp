@@ -3,10 +3,21 @@
 
 #include "./include/being.h"
 #include "./include/constants.h"
+#include "./include/helper_funcs.h"
+#include "./include/world.h"
+
+int testingFuckYou();
 
 int main() {
+    // return testingFuckYou();
+
     // Create the main window
     sf::RenderWindow window(sf::VideoMode({800, 600}), "SFML window");
+
+    // Create World
+    World myWorld;
+
+    return 0;
 
     // Create Being
     Being myBeing;
@@ -39,5 +50,16 @@ int main() {
         myBeing.draw(window);
         window.display();
     }
+    return 0;
+}
+
+int testingFuckYou() {
+    std::vector<std::vector<float>> myTestVector = {
+        {1, 2, 3, 4, 5, 5, 6},
+        {1, 2, 3, 4, 5, 5, 6},
+        {1, 4, 5, 5, 6},
+        {1, 2, 3, 4, 5, 5, 6},
+    };
+    printMartix(myTestVector);
     return 0;
 }

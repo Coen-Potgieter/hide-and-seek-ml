@@ -17,15 +17,29 @@ FetchContent_MakeAvailable(SFML)
 set(SOURCES
     ./src/main.cpp
     ./src/core/being.cpp
+    ./src/core/helper_funcs.cpp
 )
 
 # Set headers files
 set(HEADERS
     ./src/include/constants.h
     ./src/include/being.h
+    ./src/include/helper_funcs.h
+
 )
 
 add_executable(main ${SOURCES} ${HEADERS})
 target_compile_features(main PRIVATE cxx_std_17)
 target_include_directories(main PRIVATE src/) 
 target_link_libraries(main PRIVATE SFML::Graphics)
+
+# Add run target that depends on the main executable
+add_custom_target(run
+    COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green --bold "Running the application..."
+    COMMAND ${CMAKE_COMMAND} -E echo "" # Adds line after terminal output of program
+    COMMAND ./bin/main
+    COMMAND ${CMAKE_COMMAND} -E echo "" # Adds line after terminal output of program
+    COMMAND ${CMAKE_COMMAND} -E echo "------------------ Program Ended ---------------------\n"
+    COMMAND ${CMAKE_COMMAND} -E echo "" # Adds line after terminal output of program
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
