@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "./being.h"
+#include "./obstacles.h"
 
 class World {
    public:
@@ -13,40 +14,42 @@ class World {
        private:
         int num_hiders = 5;
         int num_seekers = 2;
-        GameObjects objects{};
+        Obstacles obstacles{};
 
        public:
-        Builder& withHiders(int hiders) {
-            num_hiders = hiders;
+        Builder& withHiders(int inpNumHiders) {
+            this->num_hiders = inpNumHiders;
             return *this;
         }
-        Builder& withSeekers(int seekers) {
-            num_seekers = seekers;
-            return *this;
-        }
-
-        Builder& withObjects(const GameObjects& objs) {
-            objects = objs;
+        Builder& withSeekers(int inpNumSeekers) {
+            this->num_seekers = inpNumSeekers;
             return *this;
         }
 
-        World build() { return World(num_hiders, num_seekers, objects); }
+        Builder& withObjects(const Obstacles& inpObstacles) {
+            this->obstacles = inpObstacles;
+            return *this;
+        }
+
+        World build() {
+            return World(this->num_hiders, this->num_seekers, this->obstacles);
+        }
     };
 
    private:
+    // ==================== Internal Variables ====================
     int num_hiders;
     int num_seekers;
-    GameObjects objects;
+    Obstacles obstacles;
+    std::vector<Being> players;
 
     // ==================== Constructor ====================
-    World(int hiders, int seekers, const GameObjects& objs)
-        : num_hiders(hiders), num_seekers(seekers), objects(objs) {}
+    World(int inpNumHiders, int inpNumSeekers, const Obstacles& inpObstacles)
+        : num_hiders(inpNumHiders),
+          num_seekers(inpNumSeekers),
+          obstacles(inpObstacles) {}
 
    public:
-    // ==================== Internal Variables ====================
-    std::vector<Being> players;
-    std::vector<std::vector<float>> objects;
-
     // ==================== Methods ====================
     // Called to create the World object
     static Builder create() { return Builder{}; }

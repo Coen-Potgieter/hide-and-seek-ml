@@ -4,6 +4,7 @@
 #include "./include/being.h"
 #include "./include/constants.h"
 #include "./include/helper_funcs.h"
+#include "./include/obstacles.h"
 #include "./include/world.h"
 
 int testingFuckYou();
@@ -15,12 +16,15 @@ int main() {
     sf::RenderWindow window(sf::VideoMode({800, 600}), "SFML window");
 
     // Create World
-    World myWorld;
-
-    return 0;
+    // World myWorld;
+    // return 0;
 
     // Create Being
     Being myBeing;
+
+    auto myCourse = COURSE_1;
+    // World myWorld = World::create().withObjects(COURSE_1).build();
+    World myWorld = World::create().build();
 
     // Setup Clock for fixed time steps
     sf::Clock clock;
@@ -41,13 +45,14 @@ int main() {
 
         while (accumulator >= DT) {
             // Do next simulation Step
-            myBeing.move();
+            // myBeing.move();
             accumulator -= DT;
         }
 
         // Do Rendering
         window.clear();
-        myBeing.draw(window);
+        // myBeing.draw(window);
+        myWorld.draw(window);
         window.display();
     }
     return 0;

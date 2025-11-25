@@ -16,14 +16,18 @@ FetchContent_MakeAvailable(SFML)
 # Set source files
 set(SOURCES
     ./src/main.cpp
+    ./src/core/world.cpp
     ./src/core/being.cpp
     ./src/core/helper_funcs.cpp
+    ./src/core/obstacles.cpp
 )
 
 # Set headers files
 set(HEADERS
-    ./src/include/constants.h
+    ./src/include/world.h
     ./src/include/being.h
+    ./src/include/obstacles.h
+    ./src/include/constants.h
     ./src/include/helper_funcs.h
 
 )

@@ -134,6 +134,29 @@ window.display();
 
 Rendering is **NOT** tied to the simulation tick.
 
+## Good Class Orchestration
+
+### Class Setup
+
+> This is a bit for me as well to remember how my program is set up
+- We have a `World` class that encapsulates all the game logic. Here we will create, update and draw all the entities required for the game. This means we can have one very simple `World::update()` function and one `World::draw()` function called in the `main.cpp` file. Ultimately abstracting all complications away from the main program.
+
+#### Game Obstacles
+
+- I want the game to have obstacles, of course, instead of a 2d box. How to store these objects becomes the next question. I have a `Obstacles` class that will store this. 
+- Initialisation requires a 2d vector of `std::pair<float>` types that represent the corner points (rows = shape, cols = specific shape edge locations). This initialisation is then used to create a vector sfml shapes that will be held in a single `Obstacles` object instance.
+
+#### All tunable game parameters are constant
+
+- I don't want all setup configuration of the program to happen in the `main.cpp` file. I think this introduces bloat and makes things confusing. Instead, all tunable configuration will live in the `constants.h` file. This can be dirty with comments of alternative configuration and what have you.
+
+#### Controller Interface
+
+- I am abstracting away manual or ML controlled flags and things for specific `Being` objects. Instead we will have a controller interface. That is a base class that provides the contract for what functions each controller must have and two derived classes `KeyboardController` and `NeuralController`. They each have a `getAction` function which takes in a `Being` object and the `World` (so we it can interact with the environment, so as not to move through obstacles for instance). This will then move the given `Being` object depending on what controller is involved.
+
+My question is general file structure. Should I put the interface base class as well as the two controllers in one .h file?
+
+
 
 # Contributions
 
