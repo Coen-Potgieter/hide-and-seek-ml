@@ -1,25 +1,31 @@
 
 #include "../include/being.h"
 
-Being::Being() {
-    // Create Body (Circle)
-    body = sf::CircleShape(BEING_SIZE, 4);
+#include "../include/controller.h"
+#include "../include/game.h"
 
-    // Set Colour
-    body.setFillColor(BEING_COL);
+Being::Being(Controller* inpController) { this->controller = inpController; }
 
-    // Set Initial Position
-    this->pos = {50.f, 50.f};
-    body.setPosition(this->pos);
+void Being::update(const Game& game) {
+    Action updateAction = this->controller->getAction(*this, game);
+    std::cout << "UPDATE: " << updateAction.moveX << ", " << updateAction.moveY
+              << '\n';
+    this->position.x += updateAction.moveX;
+    this->position.y += updateAction.moveY;
 
-    // Tell Console Being Was Created
-    std::cout << "Being Created...\n";
+    body.setPosition(position);
+};
+
+void Being::setBodySize(int inpRadius) {
+    this->body.setRadius(inpRadius);
+    this->body.setOrigin(
+        {static_cast<float>(inpRadius), static_cast<float>(inpRadius)});
 }
-
-void Being::move() {
-    this->pos.x += 0.1;
-    this->pos.y += 0.1;
-    body.setPosition(this->pos);
+void Being::setPosition(const sf::Vector2f inpPos) {
+    this->position = inpPos;
+    this->body.setPosition(this->position);
 }
-
-void Being::draw(sf::RenderWindow& target) const { target.draw(body); }
+void Being::setSpeed(const float inpSpeed) { this->speed = inpSpeed; }
+void Being::setVelocity(const sf::Vector2f& inpVel) { this->velocity = inpVel; }
+void Being::setColour(const sf::Color& inpColour) { this->colour = inpColour; }
+void Being::draw(sf::RenderWindow& target) const { target.draw(this->body); }

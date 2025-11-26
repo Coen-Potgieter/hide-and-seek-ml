@@ -3,6 +3,7 @@
 
 #include "./include/being.h"
 #include "./include/constants.h"
+#include "./include/game.h"
 #include "./include/helper_funcs.h"
 #include "./include/obstacles.h"
 #include "./include/world.h"
@@ -19,12 +20,10 @@ int main() {
     // World myWorld;
     // return 0;
 
-    // Create Being
-    Being myBeing;
-
     auto myCourse = COURSE_1;
     // World myWorld = World::create().withObjects(COURSE_1).build();
-    World myWorld = World::create().build();
+    // World myWorld = World::create().build();
+    Game myGame = Game(COURSE_1);
 
     // Setup Clock for fixed time steps
     sf::Clock clock;
@@ -45,14 +44,14 @@ int main() {
 
         while (accumulator >= DT) {
             // Do next simulation Step
-            // myBeing.move();
+            myGame.update();
             accumulator -= DT;
         }
 
         // Do Rendering
         window.clear();
         // myBeing.draw(window);
-        myWorld.draw(window);
+        myGame.draw(window);
         window.display();
     }
     return 0;

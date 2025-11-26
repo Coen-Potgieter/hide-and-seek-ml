@@ -1,18 +1,15 @@
-
-#ifndef BEING_H
-#define BEING_H
+#ifndef HIDER_H
+#define HIDER_H
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
 #include "./being.h"
-#include "./constants.h"
+class Controller;
 
 class Hider : public Being {
    public:
-    Hider(Controller* ctrl) : Being(ctrl) {
-        this->body.setFillColor(sf::Color::Blue);
-    }
+    explicit Hider(Controller* inpController);
 };
 
 #endif

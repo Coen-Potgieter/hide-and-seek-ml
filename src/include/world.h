@@ -41,7 +41,7 @@ class World {
     int num_hiders;
     int num_seekers;
     Obstacles obstacles;
-    std::vector<Being> players;
+    // std::vector<Being> players;
 
     // ==================== Constructor ====================
     World(int inpNumHiders, int inpNumSeekers, const Obstacles& inpObstacles)
