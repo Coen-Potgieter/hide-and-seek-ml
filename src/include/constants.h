@@ -5,13 +5,15 @@
 #include <stdint.h>
 
 #include <SFML/Graphics.hpp>
+#include <array>
 #include <utility>
+#include <vector>
 
 // Window Config
 constexpr uint16_t WINDOW_WIDTH = 1300;
 constexpr uint16_t WINDOW_HEIGHT = 800;
 constexpr float PI = 3.141592653589793;
-constexpr float DT = 0.1f;
+constexpr float DT = 0.01f;
 
 // constexpr uint16_t LEFT_MARGIN = 20;
 // constexpr uint16_t RIGHT_MARGIN = 350;
@@ -34,12 +36,5 @@ constexpr float BEING_SIZE = 3;
 /* constexpr sf::Color BIRD_COL = sf::Color(96, 153, 102); */
 /* constexpr sf::Color BIRD_COL = sf::Color(16, 135, 14); */
 /* const sf::Color BIRD_COL = sf::Color::Blue; */
-
-// Obstacles
-const std::vector<std::vector<sf::Vector2f>> COURSE_1 = {
-    {{10, 10}, {10, 20}, {20, 20}, {20, 10}},
-    {{50, 50}, {20, 20}, {70, 20}},
-    {{100, 150}, {200, 10}, {600, 8}, {400, 200}, {50, 20}},
-};
 
 #endif

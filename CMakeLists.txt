@@ -20,6 +20,7 @@ set(SOURCES
     ./src/core/game.cpp
     ./src/core/being.cpp
     ./src/core/hider.cpp
+    ./src/core/seeker.cpp
     ./src/core/keyboard_controller.cpp
     ./src/core/obstacles.cpp
     ./src/core/helper_funcs.cpp
@@ -31,6 +32,7 @@ set(HEADERS
     ./src/include/game.h
     ./src/include/being.h
     ./src/include/hider.h
+    ./src/include/seeker.h
     ./src/include/obstacles.h
     ./src/include/controller.h
     ./src/include/keyboard_controller.h

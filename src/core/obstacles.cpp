@@ -2,18 +2,15 @@
 
 #include "../include/obstacles.h"
 
-Obstacles::Obstacles(const std::vector<std::vector<sf::Vector2f>>& inpShapes) {
-    std::cout << "Creating Obstacles...\n";
+Obstacles::Obstacles(const std::vector<std::array<float, 4>>& inpRects) {
+    for (const std::array<float, 4>& rect : inpRects) {
+        sf::RectangleShape newRectangle({rect[0], rect[1]});
 
-    for (const std::vector<sf::Vector2f>& shape : inpShapes) {
-        sf::ConvexShape newShape;
-        newShape.setPointCount(shape.size());
-        size_t pointIdx = 0;
-        for (const auto& point : shape) {
-            newShape.setPoint(pointIdx, point);
-            pointIdx += 1;
-        }
-        this->obstacles.push_back(newShape);
+        // Centre Origin
+        newRectangle.setOrigin({rect[0] / 2, rect[1] / 2});
+        newRectangle.setPosition({rect[2], rect[3]});
+        // Add to vector
+        this->obstacles.push_back(newRectangle);
     }
 }
 void Obstacles::validateObjects() const {

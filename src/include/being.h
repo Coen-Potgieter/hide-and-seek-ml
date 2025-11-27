@@ -2,7 +2,16 @@
 #define BEING_H
 
 #include <SFML/Graphics.hpp>
+#include <algorithm>
 #include <iostream>
+#include <utility>
+
+#include "./helper_funcs.h"
+
+enum BeingType {
+    HIDER,
+    SEEKER,
+};
 
 class Controller;
 class Game;
@@ -11,9 +20,9 @@ class Being {
    private:
     sf::Vector2f position = {30.f, 30.f};
     sf::CircleShape body = sf::CircleShape(3);
-    sf::Vector2f velocity = {0.f, 0.f};
     float speed = 2;
-    sf::Color colour = sf::Color::White;
+
+    BeingType type;
     Controller* controller;
 
    protected:
@@ -24,14 +33,20 @@ class Being {
    public:
     virtual ~Being() = default;
 
-    void update(const Game& game);
+    // Getters
+    float getSpeed() const;
+    BeingType getType() const;
 
+    // Setters
     void setBodySize(int inpRadius);
     void setPosition(const sf::Vector2f inpPos);
     void setSpeed(const float inpSpeed);
-    void setVelocity(const sf::Vector2f& inpVel);
     void setColour(const sf::Color& inpColour);
+    void setType(const BeingType& inpType);
+
+    // Game Logic
     void draw(sf::RenderWindow& target) const;
+    void update(const Game& game);
 };
 
 #endif

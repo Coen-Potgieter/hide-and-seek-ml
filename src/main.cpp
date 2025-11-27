@@ -13,17 +13,29 @@ int testingFuckYou();
 int main() {
     // return testingFuckYou();
 
-    // Create the main window
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "SFML window");
+    // ==================== SFML Setup ====================
+    // For smooth edges on shapes
+    sf::ContextSettings settings;
+    settings.antiAliasingLevel = 8;
+    sf::RenderWindow window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}),
+                            "My Window", sf::Style::Default,
+                            sf::State::Windowed, settings);
 
+    // Fixes visual tearing casued by out of sync window with screen
+    window.setVerticalSyncEnabled(true);
+    window.setFramerateLimit(60);
+
+    // ==================== Program Setup ====================
     // Create World
     // World myWorld;
     // return 0;
 
-    auto myCourse = COURSE_1;
+    // const auto myCourse = createCourse(CourseType::BLANK);
+    const auto myCourse = createCourse(CourseType::ROOMS);
+
     // World myWorld = World::create().withObjects(COURSE_1).build();
     // World myWorld = World::create().build();
-    Game myGame = Game(COURSE_1);
+    Game myGame = Game(myCourse);
 
     // Setup Clock for fixed time steps
     sf::Clock clock;

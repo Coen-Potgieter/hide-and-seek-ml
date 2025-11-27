@@ -6,4 +6,6 @@
 //  Hider class using an initialiser list
 Hider::Hider(Controller* inpController) : Being(inpController) {
     this->setColour(sf::Color::Blue);
+    this->setType(BeingType::HIDER);
+    this->setPosition({100.f, 300.f});
 }
