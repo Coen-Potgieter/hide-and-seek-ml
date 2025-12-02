@@ -3,10 +3,10 @@
 
 #include "./include/being.h"
 #include "./include/constants.h"
-#include "./include/game.h"
 #include "./include/helper_funcs.h"
+#include "./include/manual_world.h"
 #include "./include/obstacles.h"
-#include "./include/world.h"
+#include "./include/sim_world.h"
 
 int testingFuckYou();
 
@@ -26,16 +26,17 @@ int main() {
     window.setFramerateLimit(60);
 
     // ==================== Program Setup ====================
-    // Create World
-    // World myWorld;
-    // return 0;
-
     // const auto myCourse = createCourse(CourseType::BLANK);
     const auto myCourse = createCourse(CourseType::ROOMS);
 
-    // World myWorld = World::create().withObjects(COURSE_1).build();
     // World myWorld = World::create().build();
-    Game myGame = Game(myCourse);
+    // ManualWorld myWorld = ManualWorld(myCourse);
+    ManualWorld myWorld = ManualWorld();
+    // SimWorld myWorld = SimWorld::create()
+    //                        .withObstacles(myCourse)
+    //                        .withHiders(20)
+    //                        .withSeekers(20)
+    //                        .build();
 
     // Setup Clock for fixed time steps
     sf::Clock clock;
@@ -56,14 +57,14 @@ int main() {
 
         while (accumulator >= DT) {
             // Do next simulation Step
-            myGame.update();
+            myWorld.update();
             accumulator -= DT;
         }
 
         // Do Rendering
         window.clear();
         // myBeing.draw(window);
-        myGame.draw(window);
+        myWorld.draw(window);
         window.display();
     }
     return 0;

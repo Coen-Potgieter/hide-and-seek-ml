@@ -14,7 +14,7 @@ enum BeingType {
 };
 
 class Controller;
-class Game;
+class World;
 
 class Being {
    private:
@@ -44,9 +44,9 @@ class Being {
     void setColour(const sf::Color& inpColour);
     void setType(const BeingType& inpType);
 
-    // Game Logic
+    // World Logic
     void draw(sf::RenderWindow& target) const;
-    void update(const Game& game);
+    void update(World& world);
 };
 
 #endif

@@ -7,4 +7,5 @@
 Seeker::Seeker(Controller* inpController) : Being(inpController) {
     this->setColour(sf::Color::Red);
     this->setType(BeingType::SEEKER);
+    this->setPosition({100, 100});
 }

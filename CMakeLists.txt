@@ -17,19 +17,23 @@ FetchContent_MakeAvailable(SFML)
 set(SOURCES
     ./src/main.cpp
     ./src/core/world.cpp
-    ./src/core/game.cpp
+    ./src/core/sim_world.cpp
+    ./src/core/manual_word.cpp
     ./src/core/being.cpp
     ./src/core/hider.cpp
     ./src/core/seeker.cpp
     ./src/core/keyboard_controller.cpp
+    ./src/core/neural_controller.cpp
     ./src/core/obstacles.cpp
     ./src/core/helper_funcs.cpp
 )
 
+
 # Set headers files
 set(HEADERS
     ./src/include/world.h
-    ./src/include/game.h
+    ./src/include/sim_world.h
+    ./src/include/manual_world.h
     ./src/include/being.h
     ./src/include/hider.h
     ./src/include/seeker.h

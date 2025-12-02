@@ -8,7 +8,7 @@
 
 class KeyboardController : public Controller {
    public:
-    Action getAction(const Being &self, const Game &game) override;
+    Action getAction(const Being &self, const World &world) override;
 };
 
 #endif

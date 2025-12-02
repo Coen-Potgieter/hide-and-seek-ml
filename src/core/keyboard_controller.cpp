@@ -4,7 +4,7 @@
 
 #include "../include/being.h"
 
-Action KeyboardController::getAction(const Being &self, const Game &game) {
+Action KeyboardController::getAction(const Being &self, const World &world) {
     Action beingAction = {0.f, 0.f};
 
     bool moveUpKeyDown;

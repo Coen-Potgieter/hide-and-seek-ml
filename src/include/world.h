@@ -3,56 +3,50 @@
 #define WORLD_H
 
 #include <iostream>
+#include <optional>
 #include <vector>
 
-#include "./being.h"
+#include "./constants.h"
+#include "./hider.h"
+#include "./keyboard_controller.h"
 #include "./obstacles.h"
+#include "./seeker.h"
 
 class World {
-   public:
-    class Builder {
-       private:
-        int num_hiders = 5;
-        int num_seekers = 2;
-        Obstacles obstacles{};
-
-       public:
-        Builder& withHiders(int inpNumHiders) {
-            this->num_hiders = inpNumHiders;
-            return *this;
-        }
-        Builder& withSeekers(int inpNumSeekers) {
-            this->num_seekers = inpNumSeekers;
-            return *this;
-        }
-
-        Builder& withObjects(const Obstacles& inpObstacles) {
-            this->obstacles = inpObstacles;
-            return *this;
-        }
-
-        World build() {
-            return World(this->num_hiders, this->num_seekers, this->obstacles);
-        }
-    };
-
-   private:
+   protected:
     // ==================== Internal Variables ====================
-    int num_hiders;
-    int num_seekers;
-    Obstacles obstacles;
-    // std::vector<Being> players;
+    // Default Set Values
+    Obstacles obstacles{};
+    bool ended = false;
+    size_t scoreHiders = 0;
+    size_t scoreSeekers = 0;
+
+    // Requires initialisation
+    std::vector<Hider> hiders;
+    std::vector<Seeker> seekers;
+    sf::Font endProgramFont;
+    // sf::Text has no default constructor, ie. requires font to create a text
+    //  object. So here we use `std::optional` to tell the program that either
+    //  we have a text object here or it is nothing
+    std::optional<sf::Text> endingText;
 
     // ==================== Constructor ====================
-    World(int inpNumHiders, int inpNumSeekers, const Obstacles& inpObstacles)
-        : num_hiders(inpNumHiders),
-          num_seekers(inpNumSeekers),
-          obstacles(inpObstacles) {}
+    // Default constructor when no obstacles are provided
+    World();
+    // Constructor to initialise obstacles provided
+    World(const Obstacles& inpObstacles);
+    void initText(const std::string& fontSrc);
 
    public:
-    // ==================== Methods ====================
-    // Called to create the World object
-    static Builder create() { return Builder{}; }
+    // ==================== Getters ====================
+    Obstacles getObstacles() const;
+    std::vector<Hider> getHiders() const;
+    std::vector<Seeker> getSeekers() const;
+
+    // ==================== Setters ====================
+    void setGameEnded(bool isGameEnded);
+
+    // ==================== World Logic ====================
     // Update & Draw the World
     void update();
     void draw(sf::RenderWindow& target) const;

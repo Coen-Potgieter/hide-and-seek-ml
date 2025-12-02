@@ -3,7 +3,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-class Game;
+class World;
 class Being;
 
 struct Action {
@@ -15,7 +15,7 @@ class Controller {
    public:
     // Recall: the `= 0` tells the compiler that this is a "pure virtual"
     //  function
-    virtual Action getAction(const Being& self, const Game& game) = 0;
+    virtual Action getAction(const Being& self, const World& world) = 0;
 
     // This is here to specify the destructor is strictly `virtual`
     virtual ~Controller() = default;
